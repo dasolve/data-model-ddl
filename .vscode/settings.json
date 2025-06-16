@@ -1,0 +1,100 @@
+{
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.linkedEditing": true,
+  "editor.tabSize": 2,
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "moon.binPath": "~/.proto/shims/moon",
+  "prettier.enable": true,
+  "prettier.configPath": ".prettierrc.json",
+  "prettier.useEditorConfig": false,
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "terminal.integrated.scrollback": 100000,
+  "[dbml]": {
+    "editor.defaultFormatter": "matt-meyers.vscode-dbml"
+  },
+  "[sql]": {
+    "editor.defaultFormatter": "mtxr.sqltools"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[mdx]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.tabSize": 4
+  },
+  "redhat.telemetry.enabled": false,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.execArgv": ["--max_old_space_size=16384"],
+  "typescript.tsserver.maxTsServerMemory": 16384,
+  "[feature]": {
+    "editor.defaultFormatter": "alexkrechik.cucumberautocomplete"
+  },
+  "[azure-pipelines]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "files.associations": {
+    ".azuredevops/pipelines/*.yaml": "azure-pipelines"
+  },
+  "typescript.check.npmIsInstalled": false,
+  "typescript.disableAutomaticTypeAcquisition": true,
+  "typescript.implementationsCodeLens.enabled": false,
+  "typescript.implementationsCodeLens.showOnInterfaceMethods": false,
+  "typescript.inlayHints.enumMemberValues.enabled": true,
+  "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
+  "typescript.inlayHints.variableTypes.enabled": true,
+  "typescript.locale": "en",
+  "typescript.preferences.importModuleSpecifier": "project-relative",
+  "typescript.tsc.autoDetect": "off",
+  "typescript.tsserver.nodePath": "node",
+  "eslint.nodePath": "node",
+  "telemetry.feedback.enabled": false,
+  "yaml.schemas": {
+    "./.moon/cache/schemas/project.json": ["**/moon.yml"],
+    "./.moon/cache/schemas/tasks.json": [
+      ".moon/tasks.yml",
+      ".moon/tasks/**/*.yml"
+    ],
+    "./.moon/cache/schemas/template.json": ["**/template.yml"],
+    "./.moon/cache/schemas/toolchain.json": [".moon/toolchain.yml"],
+    "./.moon/cache/schemas/workspace.json": [".moon/workspace.yml"]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "data-model-ddl",
+  "description": "A DDL for defining data models in YAML",
+  "type": "module",
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prettier": "3.5.3"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

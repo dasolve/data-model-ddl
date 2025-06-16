@@ -1,0 +1,365 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "version": {
+      "description": "Data Model DDL file version",
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "name": {
+      "title": "Data Model Name",
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 59,
+      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+    },
+    "description": {
+      "title": "Data Model Description",
+      "description": "Can be used to describe the purpose of the data model",
+      "type": "string",
+      "maxLength": 255
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "title": "Table Name",
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 59,
+            "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+          },
+          "description": {
+            "title": "Table Description",
+            "description": "Can be used to describe the purpose of the table in the data model",
+            "type": "string",
+            "maxLength": 255
+          },
+          "columns": {
+            "minItems": 1,
+            "maxItems": 1600,
+            "type": "array",
+            "items": {
+              "anyOf": [
+                {
+                  "title": "UUID identifier column",
+                  "description": "Used for identifying a record uniquely in the table with UUID v4",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "uuid"
+                    },
+                    "default": {
+                      "type": "string",
+                      "const": "gen_random_uuid()"
+                    },
+                    "primary_key": {
+                      "default": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "default",
+                    "primary_key"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "title": "Integer identifier column",
+                  "description": "Used for identifying a record uniquely in the table with auto-incrementing integer",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "integer"
+                    },
+                    "default": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        },
+                        {
+                          "type": "boolean"
+                        }
+                      ]
+                    },
+                    "primary_key": {
+                      "default": true,
+                      "type": "boolean"
+                    },
+                    "auto_increment": {
+                      "default": true,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "primary_key",
+                    "auto_increment"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "title": "Integer column",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "integer"
+                    },
+                    "nullable": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "default": {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    "unique": {
+                      "default": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "nullable"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "title": "Text column",
+                  "description": "Used for storing text content regardless of size.",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "text"
+                    },
+                    "nullable": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "default": {
+                      "type": "string"
+                    },
+                    "unique": {
+                      "default": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "title": "Date column without time",
+                  "description": "Used for storing date values without time.",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "date"
+                    },
+                    "nullable": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "default": {
+                      "type": "string",
+                      "format": "date",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                    },
+                    "unique": {
+                      "default": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "title": "Date column with time",
+                  "description": "Used for storing date and time values.",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "datetime"
+                    },
+                    "nullable": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "default": {
+                      "anyOf": [
+                        {
+                          "type": "string",
+                          "format": "date-time",
+                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
+                        },
+                        {
+                          "type": "string",
+                          "const": "CURRENT_TIMESTAMP()"
+                        }
+                      ]
+                    },
+                    "unique": {
+                      "default": false,
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "title": "UUID foreign key column",
+                  "description": "Used for identifying a row in another table with UUID v4. It references a column in another table.",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "uuid"
+                    },
+                    "nullable": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "foreign_key": {
+                      "type": "object",
+                      "properties": {
+                        "table": {
+                          "type": "string",
+                          "minLength": 2,
+                          "maxLength": 59,
+                          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                        },
+                        "column": {
+                          "type": "string",
+                          "minLength": 2,
+                          "maxLength": 59,
+                          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                        }
+                      },
+                      "required": [
+                        "table",
+                        "column"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "type",
+                    "foreign_key"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          }
+        },
+        "required": [
+          "name",
+          "columns"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "version",
+    "name",
+    "tables"
+  ],
+  "additionalProperties": false
+}

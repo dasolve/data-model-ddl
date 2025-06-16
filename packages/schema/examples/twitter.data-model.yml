@@ -1,0 +1,60 @@
+# yaml-language-server: $schema=../schemas/data-model-v1.0.0.schema.json
+version: "1.0.0"
+name: twitter
+description: A Data Model representing a Twitter-like application
+tables:
+  - name: posts
+    columns:
+      - name: id
+        type: uuid
+        description: Post identifier
+        primary_key: true
+        default: gen_random_uuid()
+      - name: title
+        type: text
+        description: Title of the post
+      - name: body
+        type: text
+        description: Content of the post
+        nullable: false
+      - name: status
+        type: text
+        nullable: false
+      - name: created_at
+        description: Timestamp when the post was created
+        type: datetime
+        nullable: false
+        default: CURRENT_TIMESTAMP()
+  - name: users
+    columns:
+      - name: id
+        type: uuid
+        description: User identifier
+        primary_key: true
+        default: gen_random_uuid()
+      - name: username
+        type: text
+        description: Unique username of the user
+        unique: true
+      - name: email
+        type: text
+        description: Unique email address of the user
+        unique: true
+      - name: created_at
+        description: Timestamp when the user was created
+        type: datetime
+        default: CURRENT_TIMESTAMP()
+        nullable: true
+  - name: follows
+    columns:
+      - name: following_user_id
+        type: uuid
+        foreign_key:
+          table: users
+          column: id
+      - name: follower_user_id
+        description: User who is following another user
+        type: uuid
+        foreign_key:
+          table: users
+          column: id
