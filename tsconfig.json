@@ -10,7 +10,7 @@
     "outDir": ".moon/cache/types",
     "baseUrl": "./",
     "paths": {
-      "schema": ["packages/schema/index.ts"]
+      "schema": ["packages/schema/src/index.ts"]
     }
   }
 }
