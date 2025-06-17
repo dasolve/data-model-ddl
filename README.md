@@ -65,8 +65,7 @@ tables:
         description: Timestamp when the user was created
         type: datetime
         default: CURRENT_TIMESTAMP()
-        nullable: true
-
+  
   - name: posts
     description: User posts/tweets
     columns:
@@ -75,6 +74,13 @@ tables:
         description: Post identifier
         primary_key: true
         default: gen_random_uuid()
+      - name: user_id
+        type: uuid
+        description: The user who created the post
+        nullable: false
+        foreign_key:
+          table: users
+          column: id
       - name: title
         type: text
         description: Title of the post
