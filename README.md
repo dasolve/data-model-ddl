@@ -65,6 +65,7 @@ tables:
         description: Timestamp when the user was created
         type: datetime
         default: CURRENT_TIMESTAMP()
+        nullable: true
   
   - name: posts
     description: User posts/tweets
