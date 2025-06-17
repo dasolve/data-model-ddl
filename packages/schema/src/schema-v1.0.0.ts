@@ -11,6 +11,10 @@ import { tableColumn } from "./columns/common";
 export const schema = z.strictObject({
   version: z.literal("1.0.0").describe("Data Model DDL file version"),
   name: tableColumn.shape.name.meta({ title: "Data Model Name" }),
+  dialect: z.enum(["postgres"]).default("postgres").optional().meta({
+    title: "Database Dialect",
+    description: "The database dialect for which the data model is intended",
+  }),
   description: tableColumn.shape.description.meta({
     title: "Data Model Description",
     description: "Can be used to describe the purpose of the data model",
