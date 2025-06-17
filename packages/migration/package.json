@@ -1,0 +1,7 @@
+{
+  "name": "migration",
+  "module": "src/index.ts",
+  "type": "module",
+  "devDependencies": {},
+  "peerDependencies": {}
+}
