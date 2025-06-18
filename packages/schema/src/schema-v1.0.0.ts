@@ -9,7 +9,7 @@ import { dateColumn, datetimeColumn } from "./columns/time";
 import { tableColumn } from "./columns/common";
 
 export const schema = z.strictObject({
-  version: z.literal("1.0.0").describe("Data Model DDL file version"),
+  version: z.literal("1.0.0").describe("Data Model DDL file version 1.0.0"),
   name: tableColumn.shape.name.meta({ title: "Data Model Name" }),
   dialect: z.enum(["postgres"]).default("postgres").optional().meta({
     title: "Database Dialect",

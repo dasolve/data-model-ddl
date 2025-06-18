@@ -16,10 +16,9 @@ export const uuidPrimaryKeyColumn = z
 
 export const integerPrimaryKeyColumn = z
   .strictObject({
-    ...tableColumn.omit({ unique: true, nullable: true }).shape,
-    type: z.literal("integer"),
+    ...tableColumn.omit({ unique: true, nullable: true, default: true }).shape,
+    type: z.literal("serial"),
     primary_key: z.boolean().default(true),
-    auto_increment: z.boolean().default(true),
   })
   .meta({
     title: "Integer identifier column",

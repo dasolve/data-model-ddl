@@ -3,7 +3,7 @@
   "type": "object",
   "properties": {
     "version": {
-      "description": "Data Model DDL file version",
+      "description": "Data Model DDL file version 1.0.0",
       "type": "string",
       "const": "1.0.0"
     },
@@ -106,26 +106,9 @@
                     },
                     "type": {
                       "type": "string",
-                      "const": "integer"
-                    },
-                    "default": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "number"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
+                      "const": "serial"
                     },
                     "primary_key": {
-                      "default": true,
-                      "type": "boolean"
-                    },
-                    "auto_increment": {
                       "default": true,
                       "type": "boolean"
                     }
@@ -133,8 +116,7 @@
                   "required": [
                     "name",
                     "type",
-                    "primary_key",
-                    "auto_increment"
+                    "primary_key"
                   ],
                   "additionalProperties": false
                 },
