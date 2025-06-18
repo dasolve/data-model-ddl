@@ -3,6 +3,9 @@
   "files": [],
   "references": [
     {
+      "path": "packages/drizzle"
+    },
+    {
       "path": "packages/schema"
     }
   ],

@@ -1,0 +1,12 @@
+{
+  "name": "@dasolve/dmddl-drizzle",
+  "module": "src/index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "schema": "workspace:*",
+    "zod": "^3.25.67"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.options.json",
+  "compilerOptions": {
+    "outDir": "../../.moon/cache/types/packages/drizzle",
+    "paths": {
+      "schema": ["../schema/src/index.ts"],
+      "schema/*": ["../schema/src/*"]
+    }
+  },
+  "include": ["**/*.ts"],
+  "references": [
+    {
+      "path": "../schema"
+    }
+  ]
+}
