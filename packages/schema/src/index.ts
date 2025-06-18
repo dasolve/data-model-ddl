@@ -1,5 +1,5 @@
-import { schema as schema_1_0_0 } from "./schema-v1.0.0";
+import { schema as v1 } from "./schemas/v1";
 
 export default {
-  "1.0.0": schema_1_0_0,
+  "1": v1,
 };

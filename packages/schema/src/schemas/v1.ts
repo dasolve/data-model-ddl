@@ -2,14 +2,16 @@ import { z } from "zod/v4";
 import {
   integerPrimaryKeyColumn,
   uuidPrimaryKeyColumn,
-} from "./columns/primary-keys";
-import { integerColumn } from "./columns/numbers";
-import { textColumn, uuidForeignKeyColumn } from "./columns/text";
-import { dateColumn, datetimeColumn } from "./columns/time";
-import { tableColumn } from "./columns/common";
+  integerForeignKeyColumn,
+  uuidForeignKeyColumn,
+} from "../columns/keys";
+import { decimalNumberColumn, integerColumn } from "../columns/numbers";
+import { textColumn } from "../columns/text";
+import { dateColumn, datetimeColumn } from "../columns/time";
+import { tableColumn } from "../columns/common";
 
 export const schema = z.strictObject({
-  version: z.literal("1.0.0").describe("Data Model DDL file version 1.0.0"),
+  version: z.literal("1").describe("Data Model DDL file version 1.0.0"),
   name: tableColumn.shape.name.meta({ title: "Data Model Name" }),
   dialect: z.enum(["postgres"]).default("postgres").optional().meta({
     title: "Database Dialect",
@@ -34,6 +36,8 @@ export const schema = z.strictObject({
           z.union([
             uuidPrimaryKeyColumn,
             integerPrimaryKeyColumn,
+            integerForeignKeyColumn,
+            decimalNumberColumn,
             integerColumn,
             textColumn,
             dateColumn,

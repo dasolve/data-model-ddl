@@ -1,5 +1,5 @@
-# yaml-language-server: $schema=../schemas/data-model-1.0.0.schema.json
-version: "1.0.0"
+# yaml-language-server: $schema=../schemas/data-model-v1.schema.json
+version: "1"
 name: twitter
 description: A Data Model representing a Twitter-like application
 tables:
