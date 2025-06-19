@@ -3,8 +3,8 @@
   "compilerOptions": {
     "outDir": "../../.moon/cache/types/packages/drizzle",
     "paths": {
-      "schema": ["../schema/src/index.ts"],
-      "schema/*": ["../schema/src/*"]
+      "@dasolve/dmddl-schema": ["../schema/src/index.ts"],
+      "@dasolve/dmddl-schema/*": ["../schema/src/*"]
     }
   },
   "include": ["**/*.ts"],

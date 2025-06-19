@@ -1,4 +1,4 @@
-import schema from "schema";
+import schema from "@dasolve/dmddl-schema";
 import { z } from "zod/v4";
 
 export const dataModelFileSchema = z.looseObject({

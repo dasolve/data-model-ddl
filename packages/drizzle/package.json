@@ -6,7 +6,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "schema": "workspace:*",
+    "@dasolve/dmddl-schema": "workspace:*",
     "zod": "^3.25.67"
   }
 }
