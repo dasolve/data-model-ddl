@@ -1,3 +1,5 @@
+#!/usr/bin/env bun
+
 import { z } from "zod/v4";
 import versions from "../src";
 

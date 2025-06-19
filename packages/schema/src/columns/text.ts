@@ -6,6 +6,7 @@ export const textColumn = z
     ...tableColumn.shape,
     type: z.literal("text"),
     default: z.string().optional(),
+    generated_always_as: z.string().optional(),
   })
   .meta({
     title: "Text column",

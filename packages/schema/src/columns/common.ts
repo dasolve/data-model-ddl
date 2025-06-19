@@ -28,5 +28,7 @@ export const tableColumn = z.strictObject({
   nullable: z.boolean().default(false).optional(),
   default: z.union([z.string(), z.number(), z.boolean()]).optional(),
   unique: z.boolean().default(false).optional(),
-  check: z.string().optional(),
+  // TODO: add check constraints
+  // check: z.string().optional(),
+  generated_always_as: z.union([z.string(), z.literal("identity")]).optional(),
 });

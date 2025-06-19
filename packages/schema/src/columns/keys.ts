@@ -3,7 +3,11 @@ import { tableColumn } from "./common";
 
 export const uuidPrimaryKeyColumn = z
   .strictObject({
-    ...tableColumn.omit({ unique: true, nullable: true }).shape,
+    ...tableColumn.omit({
+      unique: true,
+      nullable: true,
+      generated_always_as: true,
+    }).shape,
     type: z.literal("uuid"),
     primary_key: z.boolean().default(true),
     default: z.literal("gen_random_uuid()"),
@@ -17,8 +21,9 @@ export const uuidPrimaryKeyColumn = z
 export const integerPrimaryKeyColumn = z
   .strictObject({
     ...tableColumn.omit({ unique: true, nullable: true, default: true }).shape,
-    type: z.literal("serial"),
+    type: z.literal("integer"),
     primary_key: z.boolean().default(true),
+    generated_always_as: z.literal("identity"),
   })
   .meta({
     title: "Integer identifier column",
@@ -28,7 +33,11 @@ export const integerPrimaryKeyColumn = z
 
 export const integerForeignKeyColumn = z
   .strictObject({
-    ...tableColumn.omit({ unique: true, default: true, check: true }).shape,
+    ...tableColumn.omit({
+      unique: true,
+      default: true,
+      generated_always_as: true,
+    }).shape,
     type: z.literal("integer"),
     foreign_key: z.strictObject({
       table: tableColumn.shape.name,
@@ -43,7 +52,11 @@ export const integerForeignKeyColumn = z
 
 export const uuidForeignKeyColumn = z
   .strictObject({
-    ...tableColumn.omit({ unique: true, default: true, check: true }).shape,
+    ...tableColumn.omit({
+      unique: true,
+      default: true,
+      generated_always_as: true,
+    }).shape,
     type: z.literal("uuid"),
     foreign_key: z.strictObject({
       table: tableColumn.shape.name,

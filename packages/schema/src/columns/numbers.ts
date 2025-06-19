@@ -7,6 +7,7 @@ export const integerColumn = z
     type: z.literal("integer"),
     default: z.int().max(Number.MAX_SAFE_INTEGER).optional(),
     nullable: z.boolean().default(false),
+    generated_always_as: z.string().optional(),
   })
   .meta({ title: "Integer column" });
 
@@ -21,6 +22,7 @@ export const decimalNumberColumn = z
       }),
     }),
     default: z.union([z.string(), z.number()]).optional(),
+    generated_always_as: z.string().optional(),
   })
   .meta({
     title: "Decimal number column",

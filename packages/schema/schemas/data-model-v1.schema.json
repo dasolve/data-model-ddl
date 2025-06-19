@@ -76,9 +76,6 @@
                       "type": "string",
                       "const": "gen_random_uuid()"
                     },
-                    "check": {
-                      "type": "string"
-                    },
                     "primary_key": {
                       "default": true,
                       "type": "boolean"
@@ -109,10 +106,11 @@
                     },
                     "type": {
                       "type": "string",
-                      "const": "serial"
+                      "const": "integer"
                     },
-                    "check": {
-                      "type": "string"
+                    "generated_always_as": {
+                      "type": "string",
+                      "const": "identity"
                     },
                     "primary_key": {
                       "default": true,
@@ -122,6 +120,7 @@
                   "required": [
                     "name",
                     "type",
+                    "generated_always_as",
                     "primary_key"
                   ],
                   "additionalProperties": false
@@ -246,7 +245,7 @@
                       "default": false,
                       "type": "boolean"
                     },
-                    "check": {
+                    "generated_always_as": {
                       "type": "string"
                     }
                   },
@@ -287,7 +286,7 @@
                       "default": false,
                       "type": "boolean"
                     },
-                    "check": {
+                    "generated_always_as": {
                       "type": "string"
                     }
                   },
@@ -328,7 +327,7 @@
                       "default": false,
                       "type": "boolean"
                     },
-                    "check": {
+                    "generated_always_as": {
                       "type": "string"
                     }
                   },
@@ -363,15 +362,11 @@
                     },
                     "default": {
                       "type": "string",
-                      "format": "date",
-                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                      "const": "CURRENT_DATE()"
                     },
                     "unique": {
                       "default": false,
                       "type": "boolean"
-                    },
-                    "check": {
-                      "type": "string"
                     }
                   },
                   "required": [
@@ -396,32 +391,43 @@
                       "maxLength": 255
                     },
                     "type": {
-                      "type": "string",
-                      "const": "datetime"
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "const": "timestamp"
+                        },
+                        "options": {
+                          "type": "object",
+                          "properties": {
+                            "withTimeZone": {
+                              "default": true,
+                              "type": "boolean"
+                            }
+                          },
+                          "required": [
+                            "withTimeZone"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "name",
+                        "options"
+                      ],
+                      "additionalProperties": false
                     },
                     "nullable": {
                       "default": false,
                       "type": "boolean"
                     },
                     "default": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "format": "date-time",
-                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
-                        },
-                        {
-                          "type": "string",
-                          "const": "CURRENT_TIMESTAMP()"
-                        }
-                      ]
+                      "type": "string",
+                      "const": "now()"
                     },
                     "unique": {
                       "default": false,
                       "type": "boolean"
-                    },
-                    "check": {
-                      "type": "string"
                     }
                   },
                   "required": [
