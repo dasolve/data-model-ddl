@@ -2,11 +2,16 @@
   "name": "@dasolve/dmddl-drizzle",
   "module": "src/index.ts",
   "type": "module",
+  "bin": {
+    "dmddl-drizzle": "src/cli.ts"
+  },
   "peerDependencies": {
     "typescript": "^5"
   },
   "dependencies": {
     "@dasolve/dmddl-schema": "workspace:*",
-    "zod": "^3.25.67"
-  }
+    "zod": "^3.25.67",
+    "yaml": "^2.8.0"
+  },
+  "devDependencies": {}
 }

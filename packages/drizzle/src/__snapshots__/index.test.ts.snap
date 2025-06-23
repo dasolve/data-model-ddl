@@ -1,0 +1,120 @@
+// Bun Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Drizzle Schema Generator should generate schema for basic table 1`] = `
+"import { pgSchema, uuid, text, timestamp } from "drizzle-orm/pg-core";
+
+/** A simple data model with basic tables */
+const basicTableExample = pgSchema("basic_table_example");
+
+/** User information table */
+export const users = basicTableExample.table("users", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  username: text("username").notNull().unique(),
+  email: text("email").notNull().unique(),
+  created_at: timestamp("created_at", { withTimeZone: true }).defaultNow()
+});
+"
+`;
+
+exports[`Drizzle Schema Generator should generate schema with relationships 1`] = `
+"import { pgSchema, uuid, text, timestamp } from "drizzle-orm/pg-core";
+
+/** A data model demonstrating table relationships */
+const relationshipsExample = pgSchema("relationships_example");
+
+/** Department information */
+export const departments = relationshipsExample.table("departments", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull().unique()
+});
+
+/** Employee information */
+export const employees = relationshipsExample.table("employees", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  department_id: uuid("department_id").notNull().references(() => departments.id),
+  manager_id: uuid("manager_id").references(() => employees.id)
+});
+
+/** Project information */
+export const projects = relationshipsExample.table("projects", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull()
+});
+
+/** Junction table for many-to-many relationship */
+export const employeeProjects = relationshipsExample.table("employee_projects", {
+  employee_id: uuid("employee_id").notNull().references(() => employees.id),
+  project_id: uuid("project_id").notNull().references(() => projects.id)
+});
+"
+`;
+
+exports[`Drizzle Schema Generator should generate schema with various column types 1`] = `
+"import { pgSchema, uuid, text, timestamp, integer, date } from "drizzle-orm/pg-core";
+
+/** A data model showcasing different column types */
+const columnTypesExample = pgSchema("column_types_example");
+
+/** Example table with various column types */
+export const productCatalog = columnTypesExample.table("product_catalog", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  description: text("description"),
+  price: integer("price").notNull(),
+  stock_quantity: integer("stock_quantity").default(0).notNull(),
+  is_available: text("is_available").default("Y").notNull(),
+  created_at: timestamp("created_at", { withTimeZone: true }).defaultNow(),
+  updated_at: timestamp("updated_at", { withTimeZone: true }),
+  release_date: date("release_date")
+});
+"
+`;
+
+exports[`Drizzle Schema Generator should generate schema with constraints 1`] = `
+"import { pgSchema, uuid, text, timestamp, integer, date } from "drizzle-orm/pg-core";
+
+/** A data model showcasing different constraints */
+const constraintsExample = pgSchema("constraints_example");
+
+/** Product information with constraints */
+export const products = constraintsExample.table("products", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  sku: text("sku").notNull().unique(),
+  name: text("name").notNull(),
+  price: integer("price").notNull(),
+  stock: integer("stock").default(0).notNull(),
+  category_id: uuid("category_id").notNull().references(() => categories.id)
+});
+
+/** Product categories */
+export const categories = constraintsExample.table("categories", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull().unique()
+});
+"
+`;
+
+exports[`Drizzle Schema Generator should generate schema with constraints (generated always as) 1`] = `
+"import { pgSchema, uuid, text, timestamp, integer, date } from "drizzle-orm/pg-core";
+
+/** A data model showcasing different constraints */
+const constraintsExample = pgSchema("constraints_example");
+
+/** Product information with constraints */
+export const products = constraintsExample.table("products", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  sku: text("sku").notNull().unique(),
+  name: text("name").notNull(),
+  price: integer("price").notNull(),
+  stock: integer("stock").default(0).notNull(),
+  category_id: uuid("category_id").notNull().references(() => categories.id)
+});
+
+/** Product categories */
+export const categories = constraintsExample.table("categories", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  name: text("name").notNull().unique()
+});
+"
+`;

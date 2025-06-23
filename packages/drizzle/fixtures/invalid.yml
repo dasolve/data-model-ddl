@@ -1,0 +1,9 @@
+# yaml-language-server: $schema=../../schema/schemas/data-model-v1.schema.json
+version: "1"
+name: invalid_model
+description: An intentionally invalid model for testing error handling
+dialect: postgres
+tables:
+  - name: table_without_columns
+    description: This table has no columns and should fail validation
+    columns: []

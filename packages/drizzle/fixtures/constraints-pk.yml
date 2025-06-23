@@ -1,0 +1,53 @@
+# yaml-language-server: $schema=../../schema/schemas/data-model-v1.schema.json
+version: "1"
+name: constraints_example
+description: A data model showcasing different constraints
+dialect: postgres
+tables:
+  - name: products
+    description: Product information with constraints
+    columns:
+      - name: id
+        type: uuid
+        description: Product identifier
+        primary_key: true
+        default: gen_random_uuid()
+      - name: sku
+        type: text
+        description: Stock keeping unit
+        nullable: false
+        unique: true
+      - name: name
+        type: text
+        description: Product name
+        nullable: false
+      - name: price
+        type: integer
+        description: Product price in cents
+        nullable: false
+      - name: stock
+        type: integer
+        description: Current stock level
+        nullable: false
+        default: 0
+      - name: category_id
+        type: uuid
+        description: Category this product belongs to
+        nullable: false
+        foreign_key:
+          table: categories
+          column: id
+
+  - name: categories
+    description: Product categories
+    columns:
+      - name: id
+        type: integer
+        description: Category identifier
+        primary_key: true
+        generated_always_as: identity
+      - name: name
+        type: text
+        description: Category name
+        nullable: false
+        unique: true

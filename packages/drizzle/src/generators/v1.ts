@@ -1,4 +1,4 @@
-import type { schema } from "schema/schemas/v1";
+import type { schema } from "@dasolve/dmddl-schema/schemas/v1";
 import type { z } from "zod/v4";
 import { postgresqlGenerateSchemaFile } from "../dialects/postgresql";
 
@@ -7,6 +7,7 @@ export function generate(dataModel: z.infer<typeof schema>) {
     case "postgres": {
       const pgSchema: Parameters<typeof postgresqlGenerateSchemaFile>[0] = {
         name: dataModel.name,
+        description: dataModel.description,
         tables: dataModel.tables.map((t) => ({
           name: t.name,
           description: t.description,
@@ -18,7 +19,16 @@ export function generate(dataModel: z.infer<typeof schema>) {
             default: "default" in c ? c.default : undefined,
             notNull: "nullable" in c && !c.nullable,
             unique: "unique" in c && c.unique,
-            check: "check" in c ? c.check : undefined,
+            // check: "check" in c ? c.check : undefined,
+            generatedAlwaysAs:
+              "generated_always_as" in c ? c.generated_always_as : undefined,
+            foreignKey:
+              "foreign_key" in c
+                ? {
+                    table: c.foreign_key.table,
+                    column: c.foreign_key.column,
+                  }
+                : undefined,
           })),
         })),
       };

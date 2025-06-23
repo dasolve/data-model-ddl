@@ -1,0 +1,77 @@
+# yaml-language-server: $schema=../../schema/schemas/data-model-v1.schema.json
+version: "1"
+name: relationships_example
+description: A data model demonstrating table relationships
+dialect: postgres
+tables:
+  - name: departments
+    description: Department information
+    columns:
+      - name: id
+        type: uuid
+        description: Department identifier
+        primary_key: true
+        default: gen_random_uuid()
+      - name: name
+        type: text
+        description: Department name
+        nullable: false
+        unique: true
+
+  - name: employees
+    description: Employee information
+    columns:
+      - name: id
+        type: uuid
+        description: Employee identifier
+        primary_key: true
+        default: gen_random_uuid()
+      - name: name
+        type: text
+        description: Employee name
+        nullable: false
+      - name: department_id
+        type: uuid
+        description: Department this employee belongs to
+        nullable: false
+        foreign_key:
+          table: departments
+          column: id
+      - name: manager_id
+        type: uuid
+        description: Manager of this employee (self-reference)
+        nullable: true
+        foreign_key:
+          table: employees
+          column: id
+
+  - name: projects
+    description: Project information
+    columns:
+      - name: id
+        type: uuid
+        description: Project identifier
+        primary_key: true
+        default: gen_random_uuid()
+      - name: name
+        type: text
+        description: Project name
+        nullable: false
+
+  - name: employee_projects
+    description: Junction table for many-to-many relationship
+    columns:
+      - name: employee_id
+        type: uuid
+        description: Employee assigned to project
+        nullable: false
+        foreign_key:
+          table: employees
+          column: id
+      - name: project_id
+        type: uuid
+        description: Project assigned to employee
+        nullable: false
+        foreign_key:
+          table: projects
+          column: id

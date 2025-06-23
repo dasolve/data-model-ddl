@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=../../schema/schemas/data-model-v1.schema.json
+version: "1"
+name: invalid_dialect
+description: An intentionally invalid model for testing error handling
+dialect: mysql
+tables:
+  - name: table_without_columns
+    description: This table has no columns and should fail validation
+    columns:
+      - name: id
+        type: integer
+        primary_key: true
+        auto_increment: true
+      - name: name
+        type: string
+        nullable: false
+      - name: created_at
+        type: timestamp
+        default: current_timestamp()
