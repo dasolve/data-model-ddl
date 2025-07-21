@@ -42,6 +42,9 @@ export const integerForeignKeyColumn = z
     foreign_key: z.strictObject({
       table: tableColumn.shape.name,
       column: tableColumn.shape.name,
+      // TODO: support on_delete and on_update actions
+      // on_delete: z.enum(["cascade", "restrict", "set_null", "no_action"]),
+      // on_update: z.enum(["cascade", "restrict", "set_null", "no_action"]),
     }),
   })
   .meta({
@@ -61,6 +64,9 @@ export const uuidForeignKeyColumn = z
     foreign_key: z.strictObject({
       table: tableColumn.shape.name,
       column: tableColumn.shape.name,
+      // TODO: support on_delete and on_update actions
+      // on_delete: z.enum(["cascade", "restrict", "set_null", "no_action"]),
+      // on_update: z.enum(["cascade", "restrict", "set_null", "no_action"]),
     }),
   })
   .meta({

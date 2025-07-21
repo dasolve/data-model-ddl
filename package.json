@@ -5,11 +5,16 @@
   "workspaces": {
     "packages": [
       "packages/*"
-    ]
+    ],
+    "catalog": {
+      "@types/bun": "latest",
+      "prettier": "3.5.3",
+      "typescript": "^5"
+    }
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "prettier": "3.5.3",
-    "typescript": "^5"
+    "@types/bun": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
   }
 }
