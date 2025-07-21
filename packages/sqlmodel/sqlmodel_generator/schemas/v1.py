@@ -2,9 +2,9 @@
 Schema definition for v1 of the data model.
 """
 
-from typing import Dict, List, Optional, Union
+from typing import List, Optional, Union
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel
 
 
 class ForeignKey(BaseModel):

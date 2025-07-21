@@ -2,13 +2,13 @@
 PostgreSQL dialect implementation for SQLModel schema generation.
 """
 
-from typing import Any, Dict, List, Optional, Union
+from typing import Any, Dict, Optional, Union
 
-from sqlmodel_generator.parser import DataModel, Table, Column
+from sqlmodel_generator.parser import DataModel, Table
 
 
 def map_pg_type_to_sqlmodel(
-    column_type: Union[str, Dict[str, Any]], options: Optional[Dict[str, Any]] = None
+    column_type: Union[str, Dict[str, Any], Any], options: Optional[Dict[str, Any]] = None
 ) -> str:
     """
     Map PostgreSQL column types to SQLModel/SQLAlchemy types.
@@ -20,20 +20,37 @@ def map_pg_type_to_sqlmodel(
     Returns:
         SQLAlchemy type string to use in the model
     """
+    # Initialize options to empty dict if None
+    options_dict: Dict[str, Any] = {}
+
     if isinstance(column_type, dict):
         base_type = column_type["name"]
-        options = column_type.get("options", {})
+        opt = column_type.get("options", {})
+        options_dict = opt if opt is not None else {}
+    elif hasattr(column_type, "name"):
+        # Handle ColumnType objects from Pydantic models
+        base_type = column_type.name
+        options_obj = getattr(column_type, "options", None)
+
+        # Convert Pydantic model to dict or use empty dict if None
+        if options_obj is not None:
+            if hasattr(options_obj, "model_dump"):
+                # Pydantic v2 style
+                options_dict = options_obj.model_dump()
+            elif hasattr(options_obj, "dict"):
+                # Pydantic v1 style
+                options_dict = options_obj.dict()
     else:
         base_type = column_type
-        options = options or {}
+        options_dict = options or {}
 
     if base_type == "uuid":
         return "UUID"
     elif base_type == "integer":
         return "Integer"
     elif base_type == "numeric":
-        precision = options.get("precision")
-        scale = options.get("scale")
+        precision = options_dict.get("precision")
+        scale = options_dict.get("scale")
         if precision is not None and scale is not None:
             return f"Numeric(precision={precision}, scale={scale})"
         return "Numeric"
@@ -42,13 +59,18 @@ def map_pg_type_to_sqlmodel(
     elif base_type == "date":
         return "Date"
     elif base_type == "timestamp":
-        with_tz = options.get("withTimeZone", True)
+        with_tz = options_dict.get("withTimeZone", True)
         if with_tz:
             return "DateTime(timezone=True)"
         return "DateTime"
+    elif base_type == "datetime":
+        # Handle datetime which is not in the schema but used in examples
+        return "DateTime"
     else:
-        # Fall back to the base type
-        return base_type.capitalize()
+        # Fall back to the base type as a string
+        if isinstance(base_type, str):
+            return base_type.capitalize()
+        return str(base_type).capitalize()
 
 
 def generate_sqlmodel_class(table: Table) -> str:

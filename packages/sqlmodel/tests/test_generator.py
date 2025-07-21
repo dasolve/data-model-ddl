@@ -5,7 +5,6 @@ Tests for the SQLModel generator.
 import os
 from pathlib import Path
 
-import pytest
 
 from sqlmodel_generator.parser import parse_yaml_file
 from sqlmodel_generator.generator import generate_sqlmodel_schema

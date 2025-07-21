@@ -11,7 +11,6 @@ from pathlib import Path
 from typing import Dict, Optional, Union
 
 from sqlmodel_generator.parser import DataModel, parse_yaml_file
-from sqlmodel_generator.helpers.yaml_utils import load_yaml_file
 
 
 def generate_sqlmodel_schema(

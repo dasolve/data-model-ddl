@@ -8,3 +8,14 @@ language: python
 toolchain:
   default: python
 type: library
+tasks:
+  generate:
+    command: uv run -m sqlmodel_generator.cli
+    description: Generate SQLModel schema files from Data Model DSL YAML files
+    type: run
+    local: true
+    toolchain: python
+    options:
+      runInCI: false
+      persistent: false
+      outputStyle: stream

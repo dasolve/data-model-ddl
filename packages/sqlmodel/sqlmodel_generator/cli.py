@@ -4,7 +4,6 @@ Command-line interface for the SQLModel generator.
 
 import argparse
 import sys
-from pathlib import Path
 
 from sqlmodel_generator.generator import generate_sqlmodel_schema
 

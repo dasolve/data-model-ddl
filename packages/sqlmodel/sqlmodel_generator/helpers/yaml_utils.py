@@ -45,19 +45,19 @@ def find_schema_file(version: str = "v1") -> Path:
     """
     # Determine package root directory
     package_root = Path(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
-    
+
     # First look in the schema package
-    schema_package_path = package_root.parent / "schema" / "schemas" / f"data-model-{version}.schema.json"
-    
+    schema_package_path = (
+        package_root.parent / "schema" / "schemas" / f"data-model-{version}.schema.json"
+    )
+
     if schema_package_path.exists():
         return schema_package_path
-    
+
     # If not found, check in the sqlmodel package
     schema_path = package_root / "schemas" / f"data-model-{version}.schema.json"
-    
+
     if schema_path.exists():
         return schema_path
-    
-    raise FileNotFoundError(
-        f"Schema file not found at {schema_package_path} or {schema_path}"
-    )
+
+    raise FileNotFoundError(f"Schema file not found at {schema_package_path} or {schema_path}")
