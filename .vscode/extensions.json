@@ -3,6 +3,7 @@
     "oxc.oxc-vscode",
     "redhat.vscode-yaml",
     "esbenp.prettier-vscode",
-    "oven.bun-vscode"
+    "oven.bun-vscode",
+    "moonrepo.moon-console"
   ]
 }

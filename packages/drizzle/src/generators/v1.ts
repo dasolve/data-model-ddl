@@ -19,6 +19,7 @@ export function generate(dataModel: z.infer<typeof schema>) {
             default: "default" in c ? c.default : undefined,
             notNull: "nullable" in c && !c.nullable,
             unique: "unique" in c && c.unique,
+            // TODO: Handle check constraints
             // check: "check" in c ? c.check : undefined,
             generatedAlwaysAs:
               "generated_always_as" in c ? c.generated_always_as : undefined,
