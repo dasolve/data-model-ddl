@@ -11,24 +11,25 @@
     },
     "packages/drizzle": {
       "name": "@dasolve/dmddl-drizzle",
+      "bin": {
+        "dmddl-drizzle": "src/cli.ts",
+      },
       "dependencies": {
         "@dasolve/dmddl-schema": "workspace:*",
-        "zod": "^3.25.67",
-      },
-      "devDependencies": {
         "yaml": "^2.8.0",
+        "zod": "catalog:",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": "catalog:",
       },
     },
     "packages/schema": {
       "name": "@dasolve/dmddl-schema",
       "dependencies": {
-        "zod": "3.25.64",
+        "zod": "catalog:",
       },
       "peerDependencies": {
-        "typescript": "^5",
+        "typescript": "catalog:",
       },
     },
   },
@@ -36,6 +37,7 @@
     "@types/bun": "latest",
     "prettier": "3.5.3",
     "typescript": "^5",
+    "zod": "3.25.64",
   },
   "packages": {
     "@dasolve/dmddl-drizzle": ["@dasolve/dmddl-drizzle@workspace:packages/drizzle"],
@@ -60,8 +62,6 @@
 
     "yaml": ["yaml@2.8.0", "", { "bin": { "yaml": "bin.mjs" } }, "sha512-4lLa/EcQCB0cJkyts+FpIRx5G/llPxfP6VQU5KByHEhLxY3IJCH0f0Hy1MHI8sClTvsIb8qwRJ6R/ZdlDJ/leQ=="],
 
-    "zod": ["zod@3.25.67", "", {}, "sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw=="],
-
-    "@dasolve/dmddl-schema/zod": ["zod@3.25.64", "", {}, "sha512-hbP9FpSZf7pkS7hRVUrOjhwKJNyampPgtXKc3AN6DsWtoHsg2Sb4SQaS4Tcay380zSwd2VPo9G9180emBACp5g=="],
+    "zod": ["zod@3.25.64", "", {}, "sha512-hbP9FpSZf7pkS7hRVUrOjhwKJNyampPgtXKc3AN6DsWtoHsg2Sb4SQaS4Tcay380zSwd2VPo9G9180emBACp5g=="],
   }
 }

@@ -3,9 +3,9 @@
   "module": "src/index.ts",
   "type": "module",
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "catalog:"
   },
   "dependencies": {
-    "zod": "3.25.64"
+    "zod": "catalog:"
   }
 }

@@ -1,16 +1,17 @@
 {
   "name": "@dasolve/dmddl-drizzle",
+  "description": "A Drizzle schema generator for dmddl",
   "module": "src/index.ts",
   "type": "module",
   "bin": {
     "dmddl-drizzle": "src/cli.ts"
   },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "catalog:"
   },
   "dependencies": {
     "@dasolve/dmddl-schema": "workspace:*",
-    "zod": "^3.25.67",
+    "zod": "catalog:",
     "yaml": "^2.8.0"
   },
   "devDependencies": {}
