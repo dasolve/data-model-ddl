@@ -5,7 +5,7 @@ Command-line interface for the SQLModel generator.
 import argparse
 import sys
 
-from sqlmodel_generator.generator import generate_sqlmodel_schema
+from dmddl_sqlmodel.generator import generate_sqlmodel_schema
 
 
 def main():

@@ -13,7 +13,7 @@ dependencies = [
 license = {text = "FSL-1.1-ALv2"}
 
 [project.scripts]
-dmddl-sqlmodel = "sqlmodel_generator.cli:main"
+dmddl-sqlmodel = "dmddl_sqlmodel.cli:main"
 
 [build-system]
 requires = ["hatchling"]

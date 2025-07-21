@@ -68,7 +68,7 @@ The goal is to create a Python library that:
 packages/sqlmodel/
 ├── pyproject.toml       # Dependencies and project metadata
 ├── README.md            # Documentation
-├── sqlmodel_generator/  # Main package
+├── dmddl_sqlmodel/  # Main package
 │   ├── __init__.py      # Package exports
 │   ├── cli.py           # Command line interface
 │   ├── parser.py        # YAML parsing and validation

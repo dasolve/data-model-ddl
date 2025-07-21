@@ -4,7 +4,7 @@ PostgreSQL dialect implementation for SQLModel schema generation.
 
 from typing import Any, Dict, Optional, Union
 
-from sqlmodel_generator.parser import DataModel, Table
+from dmddl_sqlmodel.parser import DataModel, Table
 
 
 def map_pg_type_to_sqlmodel(

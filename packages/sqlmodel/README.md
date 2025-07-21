@@ -17,10 +17,10 @@ You can use the generator from the command line with the `uv run` command:
 
 ```bash
 # Generate schema to stdout
-cd packages/sqlmodel && uv run -m sqlmodel_generator.cli path/to/model.yml
+cd packages/sqlmodel && uv run -m dmddl_sqlmodel.cli path/to/model.yml
 
 # Generate schema to a file
-cd packages/sqlmodel && uv run -m sqlmodel_generator.cli path/to/model.yml -o output.py
+cd packages/sqlmodel && uv run -m dmddl_sqlmodel.cli path/to/model.yml -o output.py
 ```
 
 ### Using the Helper Script
@@ -43,7 +43,7 @@ packages/sqlmodel/scripts/generate.sh path/to/model.yml output.py
 You can also use the generator as a library in your Python code:
 
 ```python
-from sqlmodel_generator.generator import generate_sqlmodel_schema
+from dmddl_sqlmodel.generator import generate_sqlmodel_schema
 
 # Generate schema from a YAML file
 code = generate_sqlmodel_schema('path/to/model.yml')

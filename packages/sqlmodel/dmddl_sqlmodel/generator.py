@@ -10,7 +10,7 @@ This module is responsible for:
 from pathlib import Path
 from typing import Dict, Optional, Union
 
-from sqlmodel_generator.parser import DataModel, parse_yaml_file
+from dmddl_sqlmodel.parser import DataModel, parse_yaml_file
 
 
 def generate_sqlmodel_schema(
@@ -43,7 +43,7 @@ def generate_sqlmodel_schema(
 
     # Generate code based on dialect
     if model.dialect.lower() == "postgres":
-        from sqlmodel_generator.dialects.postgresql import generate_postgresql_schema
+        from dmddl_sqlmodel.dialects.postgresql import generate_postgresql_schema
 
         code = generate_postgresql_schema(model)
     else:

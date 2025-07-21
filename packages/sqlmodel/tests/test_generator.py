@@ -6,8 +6,8 @@ import os
 from pathlib import Path
 
 
-from sqlmodel_generator.parser import parse_yaml_file
-from sqlmodel_generator.generator import generate_sqlmodel_schema
+from dmddl_sqlmodel.parser import parse_yaml_file
+from dmddl_sqlmodel.generator import generate_sqlmodel_schema
 
 
 # Get the path to the test fixtures

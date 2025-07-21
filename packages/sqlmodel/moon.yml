@@ -10,7 +10,7 @@ toolchain:
 type: library
 tasks:
   generate:
-    command: uv run -m sqlmodel_generator.cli
+    command: uv run -m dmddl_sqlmodel.cli
     description: Generate SQLModel schema files from Data Model DSL YAML files
     type: run
     local: true
