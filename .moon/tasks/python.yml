@@ -37,3 +37,14 @@ tasks:
       cache: true
       persistent: false
       outputStyle: buffer-only-failure
+  test:
+    toolchain: python
+    type: test
+    command: uv run pytest --cov-report=xml --cov
+    inputs:
+      - "@group(sources)"
+    options:
+      runInCI: true
+      cache: true
+      persistent: false
+      outputStyle: buffer-only-failure
