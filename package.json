@@ -15,7 +15,11 @@
   },
   "devDependencies": {
     "@types/bun": "catalog:",
+    "oxlint": "1.7.0",
     "prettier": "catalog:",
     "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "^22.11.0"
   }
 }

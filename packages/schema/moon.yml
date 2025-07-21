@@ -1,0 +1,13 @@
+project:
+  name: Data Model DDL Library
+  description: Library for defining data models in YAML
+  channel: "#dmddl"
+  maintainers:
+    - "@rhuanbarreto"
+language: typescript
+toolchain:
+  default: bun
+type: library
+owners:
+  paths:
+    "*": ["@dasolve/developers"]

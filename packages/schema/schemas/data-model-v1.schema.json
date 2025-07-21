@@ -19,9 +19,7 @@
       "description": "The database dialect for which the data model is intended",
       "default": "postgres",
       "type": "string",
-      "enum": [
-        "postgres"
-      ]
+      "enum": ["postgres"]
     },
     "description": {
       "title": "Data Model Description",
@@ -81,12 +79,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type",
-                    "default",
-                    "primary_key"
-                  ],
+                  "required": ["name", "type", "default", "primary_key"],
                   "additionalProperties": false
                 },
                 {
@@ -164,18 +157,11 @@
                           "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
                         }
                       },
-                      "required": [
-                        "table",
-                        "column"
-                      ],
+                      "required": ["table", "column"],
                       "additionalProperties": false
                     }
                   },
-                  "required": [
-                    "name",
-                    "type",
-                    "foreign_key"
-                  ],
+                  "required": ["name", "type", "foreign_key"],
                   "additionalProperties": false
                 },
                 {
@@ -214,17 +200,11 @@
                               "maximum": 1000
                             }
                           },
-                          "required": [
-                            "precision",
-                            "scale"
-                          ],
+                          "required": ["precision", "scale"],
                           "additionalProperties": false
                         }
                       },
-                      "required": [
-                        "name",
-                        "options"
-                      ],
+                      "required": ["name", "options"],
                       "additionalProperties": false
                     },
                     "nullable": {
@@ -249,10 +229,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type"
-                  ],
+                  "required": ["name", "type"],
                   "additionalProperties": false
                 },
                 {
@@ -290,11 +267,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type",
-                    "nullable"
-                  ],
+                  "required": ["name", "type", "nullable"],
                   "additionalProperties": false
                 },
                 {
@@ -331,10 +304,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type"
-                  ],
+                  "required": ["name", "type"],
                   "additionalProperties": false
                 },
                 {
@@ -369,10 +339,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type"
-                  ],
+                  "required": ["name", "type"],
                   "additionalProperties": false
                 },
                 {
@@ -405,16 +372,11 @@
                               "type": "boolean"
                             }
                           },
-                          "required": [
-                            "withTimeZone"
-                          ],
+                          "required": ["withTimeZone"],
                           "additionalProperties": false
                         }
                       },
-                      "required": [
-                        "name",
-                        "options"
-                      ],
+                      "required": ["name", "options"],
                       "additionalProperties": false
                     },
                     "nullable": {
@@ -430,10 +392,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type"
-                  ],
+                  "required": ["name", "type"],
                   "additionalProperties": false
                 },
                 {
@@ -475,36 +434,22 @@
                           "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
                         }
                       },
-                      "required": [
-                        "table",
-                        "column"
-                      ],
+                      "required": ["table", "column"],
                       "additionalProperties": false
                     }
                   },
-                  "required": [
-                    "name",
-                    "type",
-                    "foreign_key"
-                  ],
+                  "required": ["name", "type", "foreign_key"],
                   "additionalProperties": false
                 }
               ]
             }
           }
         },
-        "required": [
-          "name",
-          "columns"
-        ],
+        "required": ["name", "columns"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "version",
-    "name",
-    "tables"
-  ],
+  "required": ["version", "name", "tables"],
   "additionalProperties": false
 }

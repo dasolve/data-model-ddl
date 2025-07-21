@@ -1,0 +1,13 @@
+project:
+  name: Data Model DDL Drizzle ORM Generator
+  description: Library for generating Drizzle ORM schemas from data model files
+  channel: "#dmddl"
+  maintainers:
+    - "@rhuanbarreto"
+language: typescript
+toolchain:
+  default: bun
+type: library
+owners:
+  paths:
+    "*": ["@dasolve/developers"]
