@@ -1,5 +1,6 @@
 bun = "1.2.18"
 moon = "1.38.6"
+python = "3.11.11"
 
 [settings]
 auto-install = true

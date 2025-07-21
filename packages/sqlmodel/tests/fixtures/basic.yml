@@ -1,0 +1,53 @@
+version: "1"
+name: "basic_example"
+dialect: "postgres"
+description: "A basic example data model with a few tables"
+
+tables:
+  - name: "users"
+    description: "User accounts"
+    columns:
+      - name: "id"
+        type: "uuid"
+        default: "gen_random_uuid()"
+        primary_key: true
+      - name: "username"
+        type: "text"
+        unique: true
+      - name: "email"
+        type: "text"
+        unique: true
+      - name: "created_at"
+        type:
+          name: "timestamp"
+          options:
+            withTimeZone: true
+        default: "now()"
+
+  - name: "posts"
+    description: "User posts or articles"
+    columns:
+      - name: "id"
+        type: "integer"
+        generated_always_as: "identity"
+        primary_key: true
+      - name: "title"
+        type: "text"
+      - name: "content"
+        type: "text"
+        nullable: true
+      - name: "user_id"
+        type: "uuid"
+        foreign_key:
+          table: "users"
+          column: "id"
+      - name: "published"
+        type: "integer"
+        nullable: false
+        default: 0
+      - name: "created_at"
+        type:
+          name: "timestamp"
+          options:
+            withTimeZone: true
+        default: "now()"

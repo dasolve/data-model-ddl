@@ -1,0 +1,10 @@
+project:
+  name: Data Model DDL SQLModel Generator
+  description: Library for generating SQLModel schemas from data model files
+  channel: "#dmddl"
+  maintainers:
+    - "@rhuanbarreto"
+language: python
+toolchain:
+  default: python
+type: library

@@ -1,0 +1,17 @@
+[project]
+name = "python"
+version = "0.0.1"
+description = "Monorepo"
+requires-python = "==3.11.11"
+readme = "README.md"
+dependencies = []
+
+
+[tool.uv.workspace]
+members = ["packages/sqlmodel"]
+
+[dependency-groups]
+dev = [
+    "mypy==1.17.0",
+    "ruff==0.12.4",
+]

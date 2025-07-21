@@ -11,3 +11,9 @@ typescript:
   syncProjectReferences: true
   syncProjectReferencesToPaths: true
   routeOutDirToCache: true
+python:
+  packageManager: uv
+  uv:
+    syncArgs:
+      - "--all-packages"
+  rootVenvOnly: true

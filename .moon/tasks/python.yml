@@ -1,0 +1,39 @@
+fileGroups:
+  sources:
+    - "**/*.py"
+    - "pyproject.toml"
+tasks:
+  format:
+    toolchain: python
+    type: run
+    command: uv run ruff format
+    local: true
+    inputs:
+      - "@group(sources)"
+    options:
+      runInCI: false
+      persistent: false
+      outputStyle: stream
+      envFile: /.env
+  lint:
+    toolchain: python
+    type: test
+    command: uv run ruff check
+    inputs:
+      - "@group(sources)"
+    options:
+      runInCI: true
+      cache: true
+      persistent: false
+      outputStyle: buffer-only-failure
+  typecheck:
+    toolchain: python
+    type: test
+    command: uv run mypy .
+    inputs:
+      - "@group(sources)"
+    options:
+      runInCI: true
+      cache: true
+      persistent: false
+      outputStyle: buffer-only-failure

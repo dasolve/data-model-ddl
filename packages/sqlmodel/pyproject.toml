@@ -1,0 +1,27 @@
+[project]
+name = "dmddl-sqlmodel"
+version = "0.1.0"
+description = "SQLModel schema generator for Data Model DSL"
+readme = "README.md"
+requires-python = "==3.11.11"
+dependencies = [
+    "sqlmodel==0.0.24",
+    "pyyaml==6.0.2",
+    "pydantic==2.11.7",
+    "click==8.2.1",
+]
+license = {text = "FSL-1.1-ALv2"}
+
+[project.scripts]
+dmddl-sqlmodel = "sqlmodel_generator.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["."]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
