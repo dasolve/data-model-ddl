@@ -1,6 +1,5 @@
 bun:
   syncProjectWorkspaceDependencies: true
-  version: 1.2.16
   installArgs:
     - "--frozen-lockfile"
 node: # Node.js is for running storybooks. They still don't support bun. https://github.com/storybookjs/storybook/issues/23279

@@ -1,0 +1,62 @@
+# yaml-language-server: $schema=../../schema/schemas/data-model-v1.schema.json
+version: "1"
+name: column_types_example
+description: A data model showcasing different column types
+dialect: postgres
+tables:
+  - name: product_catalog
+    description: Example table with various column types
+    columns:
+      - name: id
+        type: uuid
+        description: Product identifier
+        primary_key: true
+        default: gen_random_uuid()
+
+      # Text types
+      - name: name
+        type: text
+        description: Product name
+        nullable: false
+      - name: description
+        type: text
+        description: Product description
+        nullable: true
+
+      # Numeric types
+      - name: price
+        type: integer
+        description: Product price in cents
+        nullable: false
+      - name: stock_quantity
+        type: integer
+        description: Quantity in stock
+        nullable: false
+        default: 0
+
+      # More text for flags
+      - name: is_available
+        type: text
+        description: Whether the product is available ("Y" or "N")
+        nullable: false
+        default: "Y"
+
+      # Date/Time types
+      - name: created_at
+        type:
+          name: timestamp
+          options:
+            withTimeZone: true
+        description: When the product was created
+        default: now()
+      - name: updated_at
+        type:
+          name: timestamp
+          options:
+            withTimeZone: true
+        description: When the product was last updated
+        nullable: true
+      - name: release_date
+        type: date
+        description: Product release date
+        nullable: true

@@ -3,9 +3,9 @@
   "type": "object",
   "properties": {
     "version": {
-      "description": "Data Model DDL file version",
+      "description": "Data Model DDL file version 1.0.0",
       "type": "string",
-      "const": "1.0.0"
+      "const": "1"
     },
     "name": {
       "title": "Data Model Name",
@@ -19,9 +19,7 @@
       "description": "The database dialect for which the data model is intended",
       "default": "postgres",
       "type": "string",
-      "enum": [
-        "postgres"
-      ]
+      "enum": ["postgres"]
     },
     "description": {
       "title": "Data Model Description",
@@ -81,12 +79,7 @@
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type",
-                    "default",
-                    "primary_key"
-                  ],
+                  "required": ["name", "type", "default", "primary_key"],
                   "additionalProperties": false
                 },
                 {
@@ -108,24 +101,11 @@
                       "type": "string",
                       "const": "integer"
                     },
-                    "default": {
-                      "anyOf": [
-                        {
-                          "type": "string"
-                        },
-                        {
-                          "type": "number"
-                        },
-                        {
-                          "type": "boolean"
-                        }
-                      ]
+                    "generated_always_as": {
+                      "type": "string",
+                      "const": "identity"
                     },
                     "primary_key": {
-                      "default": true,
-                      "type": "boolean"
-                    },
-                    "auto_increment": {
                       "default": true,
                       "type": "boolean"
                     }
@@ -133,9 +113,123 @@
                   "required": [
                     "name",
                     "type",
-                    "primary_key",
-                    "auto_increment"
+                    "generated_always_as",
+                    "primary_key"
                   ],
+                  "additionalProperties": false
+                },
+                {
+                  "title": "Integer foreign key column",
+                  "description": "Used for identifying a row in another table with an integer. It references a column in another table.",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "string",
+                      "const": "integer"
+                    },
+                    "nullable": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "foreign_key": {
+                      "type": "object",
+                      "properties": {
+                        "table": {
+                          "type": "string",
+                          "minLength": 2,
+                          "maxLength": 59,
+                          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                        },
+                        "column": {
+                          "type": "string",
+                          "minLength": 2,
+                          "maxLength": 59,
+                          "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                        }
+                      },
+                      "required": ["table", "column"],
+                      "additionalProperties": false
+                    }
+                  },
+                  "required": ["name", "type", "foreign_key"],
+                  "additionalProperties": false
+                },
+                {
+                  "title": "Decimal number column",
+                  "description": "Used for storing decimal numbers with a fixed precision.",
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 2,
+                      "maxLength": 59,
+                      "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
+                    },
+                    "description": {
+                      "type": "string",
+                      "maxLength": 255
+                    },
+                    "type": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "const": "numeric"
+                        },
+                        "options": {
+                          "type": "object",
+                          "properties": {
+                            "precision": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1000
+                            },
+                            "scale": {
+                              "type": "number",
+                              "minimum": 0,
+                              "maximum": 1000
+                            }
+                          },
+                          "required": ["precision", "scale"],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": ["name", "options"],
+                      "additionalProperties": false
+                    },
+                    "nullable": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "default": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "type": "number"
+                        }
+                      ]
+                    },
+                    "unique": {
+                      "default": false,
+                      "type": "boolean"
+                    },
+                    "generated_always_as": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["name", "type"],
                   "additionalProperties": false
                 },
                 {
@@ -168,13 +262,12 @@
                     "unique": {
                       "default": false,
                       "type": "boolean"
+                    },
+                    "generated_always_as": {
+                      "type": "string"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type",
-                    "nullable"
-                  ],
+                  "required": ["name", "type", "nullable"],
                   "additionalProperties": false
                 },
                 {
@@ -206,12 +299,12 @@
                     "unique": {
                       "default": false,
                       "type": "boolean"
+                    },
+                    "generated_always_as": {
+                      "type": "string"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type"
-                  ],
+                  "required": ["name", "type"],
                   "additionalProperties": false
                 },
                 {
@@ -239,18 +332,14 @@
                     },
                     "default": {
                       "type": "string",
-                      "format": "date",
-                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))$"
+                      "const": "CURRENT_DATE()"
                     },
                     "unique": {
                       "default": false,
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type"
-                  ],
+                  "required": ["name", "type"],
                   "additionalProperties": false
                 },
                 {
@@ -269,35 +358,41 @@
                       "maxLength": 255
                     },
                     "type": {
-                      "type": "string",
-                      "const": "datetime"
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string",
+                          "const": "timestamp"
+                        },
+                        "options": {
+                          "type": "object",
+                          "properties": {
+                            "withTimeZone": {
+                              "default": true,
+                              "type": "boolean"
+                            }
+                          },
+                          "required": ["withTimeZone"],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": ["name", "options"],
+                      "additionalProperties": false
                     },
                     "nullable": {
                       "default": false,
                       "type": "boolean"
                     },
                     "default": {
-                      "anyOf": [
-                        {
-                          "type": "string",
-                          "format": "date-time",
-                          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
-                        },
-                        {
-                          "type": "string",
-                          "const": "CURRENT_TIMESTAMP()"
-                        }
-                      ]
+                      "type": "string",
+                      "const": "now()"
                     },
                     "unique": {
                       "default": false,
                       "type": "boolean"
                     }
                   },
-                  "required": [
-                    "name",
-                    "type"
-                  ],
+                  "required": ["name", "type"],
                   "additionalProperties": false
                 },
                 {
@@ -339,36 +434,22 @@
                           "pattern": "^[a-zA-Z_][a-zA-Z0-9_]*$"
                         }
                       },
-                      "required": [
-                        "table",
-                        "column"
-                      ],
+                      "required": ["table", "column"],
                       "additionalProperties": false
                     }
                   },
-                  "required": [
-                    "name",
-                    "type",
-                    "foreign_key"
-                  ],
+                  "required": ["name", "type", "foreign_key"],
                   "additionalProperties": false
                 }
               ]
             }
           }
         },
-        "required": [
-          "name",
-          "columns"
-        ],
+        "required": ["name", "columns"],
         "additionalProperties": false
       }
     }
   },
-  "required": [
-    "version",
-    "name",
-    "tables"
-  ],
+  "required": ["version", "name", "tables"],
   "additionalProperties": false
 }

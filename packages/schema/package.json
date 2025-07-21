@@ -1,14 +1,12 @@
 {
-  "name": "schema",
+  "name": "@dasolve/dmddl-schema",
   "module": "src/index.ts",
+  "license": "FSL-1.1-ALv2",
   "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
   "peerDependencies": {
-    "typescript": "^5"
+    "typescript": "catalog:"
   },
   "dependencies": {
-    "zod": "3.25.64"
+    "zod": "catalog:"
   }
 }

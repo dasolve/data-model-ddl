@@ -1,0 +1,31 @@
+# yaml-language-server: $schema=../../schema/schemas/data-model-v1.schema.json
+version: "1"
+name: basic_table_example
+description: A simple data model with basic tables
+dialect: postgres
+tables:
+  - name: users
+    description: User information table
+    columns:
+      - name: id
+        type: uuid
+        description: User identifier
+        primary_key: true
+        default: "gen_random_uuid()"
+      - name: username
+        type: text
+        description: Username for login
+        nullable: false
+        unique: true
+      - name: email
+        type: text
+        description: User email address
+        nullable: false
+        unique: true
+      - name: created_at
+        description: Timestamp of user creation
+        type:
+          name: timestamp
+          options:
+            withTimeZone: true
+        default: now()

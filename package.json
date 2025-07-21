@@ -1,15 +1,26 @@
 {
   "name": "data-model-ddl",
   "description": "A DDL for defining data models in YAML",
+  "license": "FSL-1.1-ALv2",
   "type": "module",
   "workspaces": {
     "packages": [
       "packages/*"
-    ]
+    ],
+    "catalog": {
+      "@types/bun": "latest",
+      "prettier": "3.5.3",
+      "typescript": "^5",
+      "zod": "3.25.64"
+    }
   },
   "devDependencies": {
-    "@types/bun": "latest",
-    "prettier": "3.5.3",
-    "typescript": "^5"
+    "@types/bun": "catalog:",
+    "oxlint": "1.7.0",
+    "prettier": "catalog:",
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": "^22.11.0"
   }
 }

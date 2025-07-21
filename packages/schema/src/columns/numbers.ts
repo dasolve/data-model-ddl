@@ -7,20 +7,24 @@ export const integerColumn = z
     type: z.literal("integer"),
     default: z.int().max(Number.MAX_SAFE_INTEGER).optional(),
     nullable: z.boolean().default(false),
+    generated_always_as: z.string().optional(),
   })
   .meta({ title: "Integer column" });
 
-export const integerForeignKeyColumn = z
+export const decimalNumberColumn = z
   .strictObject({
-    ...tableColumn.omit({ unique: true, default: true }).shape,
-    type: z.literal("integer"),
-    foreign_key: z.strictObject({
-      table: tableColumn.shape.name,
-      column: tableColumn.shape.name,
+    ...tableColumn.shape,
+    type: z.strictObject({
+      name: z.literal("numeric"),
+      options: z.strictObject({
+        precision: z.number().min(0).max(1000),
+        scale: z.number().min(0).max(1000),
+      }),
     }),
+    default: z.union([z.string(), z.number()]).optional(),
+    generated_always_as: z.string().optional(),
   })
   .meta({
-    title: "Integer foreign key column",
-    description:
-      "Used for identifying a row in another table with an integer. It references a column in another table.",
+    title: "Decimal number column",
+    description: "Used for storing decimal numbers with a fixed precision.",
   });

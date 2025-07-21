@@ -1,0 +1,129 @@
+fileGroups:
+  sources:
+    - package.json
+    - src/**/*
+    - "!**/*.snap.png"
+    - "**/*.json"
+    - "**/*.ts"
+    - "**/*.tsx"
+    - "**/*.css"
+    - "**/*.sql"
+  eslint:
+    - /packages/library-eslint/eslint.config.mjs
+    - /.oxlintrc.json
+    - /tsconfig.options.json
+  not-storybook-files:
+    - "!**/*.stories.{js,jsx,mjs,ts,tsx}"
+    - "!.storybook/**"
+  test-files:
+    - "**/*.test.{js,jsx,mjs,ts,tsx}"
+    - "**/mock.{ts,tsx}"
+  not-test-files:
+    - "!**/*.test.{js,jsx,mjs,ts,tsx}"
+    - "!**/mock.{ts,tsx}"
+  design-system:
+    - "/packages/library-design-system/**/*.{ts,tsx}"
+    - "!/packages/library-design-system/.storybook/**/*"
+  ui-components:
+    - "/packages/library-ui-components/**/*.{ts,tsx}"
+    - "!/packages/library-ui-components/.storybook/**/*"
+tasks:
+  typecheck:
+    toolchain: bun
+    command: bun --bun tsc --build
+    inputs:
+      - "@group(sources)"
+      - /tsconfig.options.json
+      - /tsconfig.json
+      - tsconfig.json
+    deps:
+      - "^:typecheck"
+    type: test
+    options:
+      runInCI: true
+      persistent: false
+      mutex: lint
+      outputStyle: buffer-only-failure
+  oxlint:
+    toolchain: bun
+    command: bun --bun oxlint
+    inputs:
+      - "@group(sources)"
+      - "@group(eslint)"
+    type: test
+    options:
+      runInCI: true
+      persistent: false
+      internal: true
+      cache: true
+      outputStyle: buffer-only-failure
+  # lint:
+  #   toolchain: bun
+  #   command: bun --bun eslint . --report-unused-disable-directives --max-warnings=0
+  #   inputs:
+  #     - "@group(sources)"
+  #     - "@group(eslint)"
+  #   deps:
+  #     - oxlint
+  #     - "^:lint"
+  #   type: test
+  #   options:
+  #     cache: true
+  #     timeout: 660
+  #     runInCI: true
+  #     persistent: false
+  #     mutex: lint
+  #     outputStyle: buffer-only-failure
+  test:
+    toolchain: bun
+    command: bun test --coverage --coverage-reporter=lcov --coverage-dir=../../coverage/$project --reporter=junit --reporter-outfile=junit.xml
+    inputs:
+      - "@group(sources)"
+    outputs:
+      - junit.xml
+      - /coverage/$project/lcov.info
+    type: test
+    deps:
+      - "^:test"
+    options:
+      runInCI: true
+      persistent: false
+      # This is to avoid scenario where errors are not caught by moon
+      timeout: 210
+      retryCount: 2
+      outputStyle: buffer-only-failure
+  test-update-snapshots:
+    toolchain: bun
+    command: bun test --update-snapshots
+    type: build
+    local: true
+    inputs:
+      - "@group(test-files)"
+    outputs:
+      - "**/__snapshots__/*.snap"
+    options:
+      persistent: false
+      runInCI: false
+  format:
+    toolchain: bun
+    command: prettier --config=../../.prettierrc.json --ignore-path=../../.prettierignore --write .
+    inputs:
+      - "@group(sources)"
+      - /.prettierrc.json
+      - /.prettierignore
+    type: run
+    local: true
+    options:
+      persistent: false
+  format-check:
+    toolchain: bun
+    command: prettier --config=../../.prettierrc.json --ignore-path=../../.prettierignore --check .
+    inputs:
+      - "@group(sources)"
+      - /.prettierrc.json
+      - /.prettierignore
+    type: test
+    options:
+      runInCI: true
+      persistent: false
+      outputStyle: buffer-only-failure

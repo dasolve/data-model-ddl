@@ -66,7 +66,7 @@ tables:
         type: datetime
         default: CURRENT_TIMESTAMP()
         nullable: true
-  
+
   - name: posts
     description: User posts/tweets
     columns:
@@ -137,6 +137,10 @@ Each column can have the following properties:
 - **nullable**: Boolean indicating if NULL values are allowed
 - **default**: Default value expression
 - **foreign_key**: Reference to another table's column
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=@dasolve/dmddl&type=Date)](https://www.star-history.com/#@dasolve/dmddl&Date)
 
 ## Contributing
 
