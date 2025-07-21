@@ -363,3 +363,4 @@ __azurite_*
 AzuriteConfig
 
 
+.ruff_cache
