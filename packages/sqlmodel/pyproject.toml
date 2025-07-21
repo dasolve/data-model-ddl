@@ -25,6 +25,28 @@ packages = ["."]
 line-length = 100
 target-version = "py311"
 
+[tool.mypy]
+python_version = "3.11"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = true
+no_implicit_optional = true
+strict_optional = true
+plugins = ["pydantic.mypy"]
+namespace_packages = true
+explicit_package_bases = true
+mypy_path = "."
+
+[[tool.mypy.overrides]]
+module = [
+    "sqlmodel.*",
+    "yaml.*",
+]
+ignore_missing_imports = true
+
 [dependency-groups]
 dev = [
     "types-pyyaml>=6.0.12.20250516",
