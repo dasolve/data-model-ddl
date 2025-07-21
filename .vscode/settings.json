@@ -1,16 +1,25 @@
 {
-  "javascript.format.enable": false,
-  "typescript.format.enable": false,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.linkedEditing": true,
   "editor.tabSize": 2,
   "git.autofetch": true,
   "git.confirmSync": false,
-  "moon.binPath": "~/.proto/shims/moon",
+  "yaml.schemas": {
+    "packages/infra/Pulumi.config.schema.json": "Pulumi.*.yaml",
+    "./.moon/cache/schemas/workspace.json": ".moon/workspace.yml",
+    "./.moon/cache/schemas/tasks.json": [
+      ".moon/tasks.yml",
+      ".moon/tasks/**/*.yml"
+    ],
+    "./.moon/cache/schemas/project.json": "**/moon.yml",
+    "./.moon/cache/schemas/toolchain.json": ".moon/toolchain.yml",
+    "./.moon/cache/schemas/template.json": "**/template.yml"
+  },
+  "moon.binPath": "~/.moon/bin/moon",
   "prettier.enable": true,
   "prettier.configPath": ".prettierrc.json",
   "prettier.useEditorConfig": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "terminal.integrated.scrollback": 100000,
   "[dbml]": {
@@ -74,6 +83,8 @@
   "files.associations": {
     ".azuredevops/pipelines/*.yaml": "azure-pipelines"
   },
+  "javascript.format.enable": false,
+  "typescript.format.enable": false,
   "typescript.check.npmIsInstalled": false,
   "typescript.disableAutomaticTypeAcquisition": true,
   "typescript.implementationsCodeLens.enabled": false,
@@ -83,18 +94,20 @@
   "typescript.inlayHints.variableTypes.enabled": true,
   "typescript.locale": "en",
   "typescript.preferences.importModuleSpecifier": "project-relative",
+  "typescript.preferences.autoImportSpecifierExcludeRegexes": ["^@mui/[^/]+$"],
   "typescript.tsc.autoDetect": "off",
   "typescript.tsserver.nodePath": "node",
-  "eslint.nodePath": "node",
+  "eslint.runtime": "node",
   "telemetry.feedback.enabled": false,
-  "yaml.schemas": {
-    "./.moon/cache/schemas/project.json": ["**/moon.yml"],
-    "./.moon/cache/schemas/tasks.json": [
-      ".moon/tasks.yml",
-      ".moon/tasks/**/*.yml"
-    ],
-    "./.moon/cache/schemas/template.json": ["**/template.yml"],
-    "./.moon/cache/schemas/toolchain.json": [".moon/toolchain.yml"],
-    "./.moon/cache/schemas/workspace.json": [".moon/workspace.yml"]
+  "editor.codeActionsOnSave": {
+    "source.fixAll.ts": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+  "json.maxItemsComputed": 100,
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.useFlatConfig": true,
+  "files.watcherExclude": {
+    "**/dist/**": true,
+    "**/node_modules/**": true
   }
 }
