@@ -8,6 +8,3 @@ language: typescript
 toolchain:
   default: bun
 type: library
-owners:
-  paths:
-    "*": ["@dasolve/developers"]

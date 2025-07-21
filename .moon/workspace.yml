@@ -5,3 +5,21 @@ projects:
 vcs:
   manager: "git"
   defaultBranch: "main"
+  provider: github
+
+telemetry: false
+constraints:
+  enforceProjectTypeRelationships: true
+codeowners:
+  syncOnRun: true
+  globalPaths:
+    "*": ["@dasolve/developers"]
+    ".moon/": ["@dasolve/infra"]
+    ".github/": ["@dasolve/infra"]
+    ".vscode/": ["@dasolve/infra"]
+runner:
+  killProcessThreshold: 1
+  inheritColorsForPipedTasks: true
+  syncProjectDependencies: true
+  syncWorkspace: true
+  syncProjects: true
