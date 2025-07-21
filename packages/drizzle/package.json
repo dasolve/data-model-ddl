@@ -1,6 +1,7 @@
 {
   "name": "@dasolve/dmddl-drizzle",
   "description": "A Drizzle schema generator for dmddl",
+  "license": "FSL-1.1-ALv2",
   "module": "src/index.ts",
   "type": "module",
   "bin": {
