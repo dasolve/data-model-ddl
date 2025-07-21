@@ -19,8 +19,8 @@ permissions:
 
 jobs:
   build-and-check:
-    runs-on: ubuntu-latest-big
-    timeout-minutes: 70
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
     name: Check
     if: github.event.pull_request.draft == false
     steps:
